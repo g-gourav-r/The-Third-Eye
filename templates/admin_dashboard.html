@@ -1,0 +1,104 @@
+<!-- Extending the base template -->
+{% extends 'base.html' %}
+
+<!-- Highlight item in the sidebar -->
+{% block dashboard %}sidebar-selected{% endblock %}
+
+<!-- Main content of the body -->
+{% block main_content %}
+<div class="img_container">
+  <center><img src="{{ url_for('video_feed') }}" width="640" height="480">
+  <!-- <center><img src="" width="50%" height="25%"> -->
+  <p>Camera 1</p></center>
+</div>
+<h2>Report</h2>
+<div class="table-responsive small">
+  <table class="table table-striped table-sm text-center">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Image</th>
+        <th>Status</th>
+        <th>Location</th>
+        <th>Time</th>
+        <th>Location Image</th>
+    </tr>
+    </thead>
+    <tbody>
+      {% for target in targets %}
+        {% if target['to_be_tracked'] == 1 %}
+          <tr>
+              <td class="align-middle">{{ target['target_id'] }}</td>
+              <td class="align-middle">{{ target['name'] }}</td>
+              <td class="align-middle">
+                  <img src="data:image/png;base64,{{ target['decoded_image'] }}" alt="{{ target['name'] }} Image" 
+                      style="width: 50px; height: 50px; object-fit: cover; border-radius: 50%;">
+              </td>
+              <td class="align-middle">
+                  {% if target['status'] == 0 %}
+                  <div class="spinner-grow text-danger" role="status">
+                    <span class="sr-only"></span>
+                  </div>
+                  {% elif target['status'] == 1 %}
+                  <div class="spinner-grow text-success" role="status">
+                  </div>
+                  {% else %}
+                      Unknown Status
+                  {% endif %}
+              </td>
+              <td class="align-middle">{{ target['location'] or 'N/A' }}</td>
+              <td class="align-middle">{{ target['time'] or 'N/A' }}</td>
+              <td class="align-middle">
+                  {% if target['decoded_location_image'] %}
+                      <img src="data:image/png;base64,{{ target['decoded_location_image'] }}" alt="Location Image" 
+                          style="width: 50px; height: 50px; object-fit: cover; border-radius: 50%;">
+                  {% else %}
+                      N/A
+                  {% endif %}
+              </td>
+          </tr>
+        {% endif %}
+  {% endfor %}
+  </tbody>
+  </table>
+</div>
+
+{% endblock %}
+    <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+
+
+
+    </main>
+  </div>
+</div>
+<script src="../static/assets/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    // Check if the browser supports getUserMedia
+    if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+      // Access the camera and display the feed on the canvas
+      navigator.mediaDevices.getUserMedia({ video: true })
+        .then(function(stream) {
+          var video = document.createElement("video");
+          video.srcObject = stream;
+          video.play();
+
+          // Draw the camera feed onto the canvas
+          var canvas = document.getElementById("cameraFeed");
+          var context = canvas.getContext("2d");
+
+          video.addEventListener("loadeddata", function() {
+            context.drawImage(video, 0, 0, canvas.width, canvas.height);
+          });
+        })
+        .catch(function(error) {
+          console.error("Error accessing camera: ", error);
+        });
+    } else {
+      console.error("getUserMedia not supported on this browser");
+    }
+  });
+</script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.3.2/dist/chart.umd.js" integrity="sha384-eI7PSr3L1XLISH8JdDII5YN/njoSsxfbrkCTnJrzXt+ENP5MOVBxD+l6sEG4zoLp" crossorigin="anonymous"></script><script src="dashboard.js"></script></body>
+</html>

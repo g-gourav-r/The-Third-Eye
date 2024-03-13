@@ -1,0 +1,141 @@
+/*********************/
+/***Generic Styling***/
+/*********************/
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300&display=swap');
+
+html {
+    margin: 0;
+}
+
+body {
+    font-family: "Roboto", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    color: #EEEEEE;
+    background-color: #1c1f24;
+}
+
+.roboto-thin {
+    font-family: "Roboto", sans-serif;
+    font-weight: 100;
+    font-style: normal;
+}
+
+.roboto-light {
+    font-family: "Roboto", sans-serif;
+    font-weight: 300;
+    font-style: normal;
+}
+
+.tinted-background {
+    background-color: #222831;
+}
+
+/**********************/
+/**Navigation Styling**/
+/**********************/
+
+.navigation {
+    border: 1px solid #76ABAE;
+    color: #76ABAE;
+}
+
+/**************************/
+/**Middle content Styling**/
+/**************************/
+.sidebar, .main-content {
+    height: 80vh;
+    border: 1px solid #76ABAE;
+}
+
+/*********************/
+/** Side Bar Styling**/
+/*********************/
+.sidebar-content:hover{
+    background-color: #76ABAE;
+}
+
+.sidebar-selected {
+    background-color: #76ABAE;
+}
+
+.sign-out {
+    background-color: #ae7876;
+}
+
+.sign-out:hover {
+    background-color: hsl(2, 100%, 34%);
+}
+
+.sidebar a{
+    text-decoration: none;
+    color: #EEEEEE  ;
+}
+
+/*********************/
+/** Add User Styling**/
+/*********************/
+
+.add-user-wrapper{
+    height: 100%;
+}
+
+.add-user-wrapper input {
+    background-color: #222831;
+    border: 1px solid #EEEEEE;
+    border-radius: 8px; /* Adjust the value as needed for the desired curvature */
+    padding: 8px; /* Add padding for better visual appearance */
+    color: #FFFFFF; /* Text color */
+    box-shadow: none;
+}
+
+.add-user-wrapper input:hover {
+    color: #FFFFFF; /* Text color */
+    background-color: #76ABAE;
+}
+
+.add-user-wrapper button {
+    color: #FFFFFF; /* Text color */
+    background-color: #76ABAE;
+    border-radius: 25px;
+}
+
+.add-user-wrapper button:hover {
+    color: #FFFFFF; /* Text color */
+    background-color: #00abb4;
+    border-radius: 25px;
+}
+
+/*****************************/
+/** Register Missing Styling**/
+/*****************************/
+
+.register-user-wrapper{
+    height: 100%;
+}
+
+.form-wrapper{
+    border: 1px solid #76ABAE;
+}
+
+.form-wrapper input{
+    background-color: #222831;
+}
+
+.missing-button{
+    background-color: #76ABAE;
+    border-radius: 10px;
+    color: #EEEEEE;
+}
+
+.missing-button:hover{
+    background-color: #00abb4;
+}
+
+/***********************/
+/** Login Page Styling**/
+/***********************/
+
+.login-wrapper{
+    height: 100%;
+}

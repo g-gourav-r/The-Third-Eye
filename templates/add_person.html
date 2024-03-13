@@ -1,0 +1,38 @@
+<!-- Extending the base template -->
+{% extends 'base.html' %}
+
+<!-- Highlight item in the sidebar -->
+{% block register_missing %}sidebar-selected{% endblock %}
+
+<!-- Main content of the body -->
+{% block main_content %}
+
+<div class="register-user-wrapper d-flex align-items-center justify-content-center">
+  <div class="form-wrapper col-md-6 p-4 rounded">
+    <form method="POST" enctype="multipart/form-data">
+      <div class="input mb-3">
+        <label for="username" class="form-label">Name:</label>
+        <input type="text" id="nameInput" name="name" class="form-control">
+      </div>
+      <div class="input mb-3">
+        <label for="profilePicture" class="form-label">Upload JPG Picture:</label>
+        <input type="file" id="fileInput" name="file" accept=".jpg" required class="form-control" >
+      </div>
+      <div class="input mb-3  d-flex align-items-center justify-content-center">
+        <label for="missingButton" class="form-label"></label>
+        <button type="submit" class=" missing-button btn-primary" id="missingButton">Register Missing</button>
+      </div>
+      <div class="invalid-feedback" id="fileValidationFeedback">
+        Please upload a valid JPG file.
+    </div>
+    </form>
+    <div class="container mt-5">
+      {% if show_success %}
+      <h2 class="mb-4">Upload Successful</h2>
+          <p>ID for the missing person is : {{ entry_id }}</p>
+      {% endif %}
+  </div>
+  </div>
+</div>
+
+{% endblock %}

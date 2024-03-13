@@ -1,0 +1,63 @@
+CREATE TABLE User (
+    user_id INTEGER PRIMARY KEY,
+    first_name TEXT,
+    last_name TEXT,
+    username TEXT UNIQUE,
+    password TEXT,
+    is_admin BOOLEAN
+);
+
+CREATE TABLE Target (
+    target_id INTEGER PRIMARY KEY,
+    name TEXT,
+    image BLOB
+);
+
+CREATE TABLE Log (
+    log_id INTEGER PRIMARY KEY,
+    name TEXT,
+    target_id INTEGER REFERENCES Target(target_id),
+    target_image BLOB,
+    time_date DATETIME,
+    camera_location TEXT
+);
+
+-- Table for basic information
+CREATE TABLE Target (
+    target_id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name VARCHAR(255) NOT NULL,
+    image BLOB,
+    status BOOLEAN
+);
+
+
+-- Table for location information
+CREATE TABLE Location (
+    location_id INT PRIMARY KEY,
+    target_id INT,
+    location VARCHAR(255),
+    time DATETIME,
+    location_image BLOB,
+    FOREIGN KEY (target_id) REFERENCES Target(target_id)
+);
+
+--------------------------------------------------------------------------------------------------------
+CREATE TABLE missingPerson (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name VARCHAR(255),
+    image BLOB,
+    status BOOLEAN,
+    location VARCHAR(255),
+    location_image BLOB,
+    time DATETIME,
+    to_be_tracked BOOLEAN
+, uploadtime DATETIME);
+
+CREATE TABLE User (
+                user_id INTEGER PRIMARY KEY,     
+                first_name TEXT,
+                last_name TEXT,
+                username TEXT UNIQUE,
+                password TEXT,
+                is_admin BOOLEAN
+            );

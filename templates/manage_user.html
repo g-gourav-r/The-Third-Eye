@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+{% block head%} 
+    <title>Manage User</title> 
+{% endblock %}
+
+{% block body%}
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <!-- Navbar content here -->
+    </nav>
+
+    <div class="container mt-3">
+        <div class="row">
+            <div class="col-md-12">
+                <h2>User Management</h2>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>First Name</th>
+                            <th>Last Name</th>
+                            <th>Username</th>
+                            <th>is_admin</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for user in users %}
+                            <tr>
+                                <td>{{ user[0] }}</td>
+                                <td>{{ user[1] }}</td>
+                                <td>{{ user[2] }}</td>
+                                <td>{{ user[3] }}</td>
+                                <td>
+                                    <form action="{{ url_for('toggle_admin', user_id=user[0]) }}" method="post">
+                                        <input type="hidden" name="_method" value="PATCH">
+                                        <button type="submit" class="btn {{ 'btn-success' if user[5] == 1 else 'btn-primary' }} toggle-btn" name="is_admin" value="{{ 1 if user[5] == 0 else 0 }}">
+                                            {{ 'Admin' if user[5] == 1 else 'User' }}
+                                        </button>
+                                    </form>
+                                </td>
+                                <td>
+                                    <form action="{{ url_for('delete_user', user_id=user[0]) }}" method="post">
+                                        <input type="hidden" name="_method" value="DELETE">
+                                        <button type="submit" class="btn btn-danger delete-btn" onclick="return confirm('Are you sure?')">Delete</button>
+                                    </form>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}
