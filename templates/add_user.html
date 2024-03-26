@@ -6,51 +6,64 @@
 
 <!-- Main content of the body -->
 {% block main_content %}
-<div class="add-user-wrapper  mx-auto my-auto d-flex align-items-center justify-content-center">
-  <div class="add-user-form  rounded col-md-8">
+<div class="add-user-wrapper mx-auto my-auto d-flex align-items-center justify-content-center">
+  <div class="add-user-form rounded col-md-8 border p-4">
     <form class="row" novalidate method="post" action="{{ url_for('add_user') }}">
-    <div class="row p-2 m-2">
-      <label class="col-md-4 text-start" for="firstname">First Name:</label>
-      <input type="text" class="col-md-4" id="first_name" name="first_name" required placeholder="Enter your first name">
-    </div>
-    <div class="row p-2 m-2">
-      <label class="col-md-4 text-start" for="lastname">Last Name:</label>
-      <input type="text" class="col-md-4" id="last_name" name="last_name" required placeholder="Enter your last name">
-    </div>
-    <div class="row p-2 m-2">
-      <label class="col-md-4 text-start" for="username">Username:</label>
-      <input type="text" class="col-md-4" name="username" id="username" required placeholder="Choose a username">
-    </div>
-    <div class="row p-2 m-2">
-      <label class="col-md-4 text-start" for="password">Password:</label>
-      <input type="password" class="col-md-4" name="password" id="password" placeholder="Enter a strong password" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$" required>
-    </div>
-    <div class="row p-2 m-2">
-      <label class="col-md-4 text-start" for="reset_password">Confirm Password:</label>
-      <input type="password" class="col-md-4" id="confirm_password" name="confirm_password" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$" required placeholder="Re-enter your password">
-    </div>
-    <div class="row p-2 m-2">
-      <label class="col-md-4 text-start" for="is_admin">Is Admin:</label>
-      <input type="checkbox" class="col-md-4 text-start" name="is_admin" id="is_admin">
-    </div>
-    <div class="row p-2 m-2 text-start">
-      <label class="col-md-4 text-start" for="register_user"></label>
-      <button type="submit" class="col-md-4">Register User</button>
-    </div>
-  </form>
-  <br>
-  {% if error %}
-  <div class="alert alert-danger" role="alert">
-    {{ error }}
-  </div>
-  {% endif %}
+      <div class="row mb-3">
+        <label class="col-md-2 col-form-label" for="first_name">First Name:</label>
+        <div class="col-md-4">
+          <input type="text" class="form-control" id="first_name" name="first_name" required placeholder="Enter your first name">
+        </div>
+        <label class="col-md-2 col-form-label" for="last_name">Last Name:</label>
+        <div class="col-md-4">
+          <input type="text" class="form-control" id="last_name" name="last_name" required placeholder="Enter your last name">
+        </div>
+      </div>
+      <div class="row mb-3">
+        <label class="col-md-2 col-form-label" for="username">Username:</label>
+        <div class="col-md-10">
+          <input type="text" class="form-control" name="username" id="username" required placeholder="Choose a username">
+        </div>
+      </div>
+      <div class="row mb-3">
+        <label class="col-md-2 col-form-label" for="password">Password:</label>
+        <div class="col-md-10">
+          <input type="password" class="form-control" name="password" id="password" placeholder="Enter a strong password" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$" required>
+        </div>
+      </div>
+      <div class="row mb-3">
+        <label class="col-md-2 col-form-label" for="confirm_password">Confirm Password:</label>
+        <div class="col-md-10">
+          <input type="password" class="form-control" id="confirm_password" name="confirm_password" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$" required placeholder="Re-enter your password">
+        </div>
+      </div>
+      <div class="row mb-3">
+        <div class="col-md-2">Is Admin:</div>
+        <div class="col-md-10">
+          <input type="checkbox" class="form-check-input" name="is_admin" id="is_admin">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-10">
+          <button type="submit" class="btn btn-primary">Register User</button>
+        </div>
+      </div>
+    </form>
 
-  {% if status %}
-  <div class="alert alert-success" role="alert">
-    {{ status }}
-  </div>
-  {% endif %}
+    {% if error %}
+    <div class="alert alert-danger mt-3" role="alert">
+      {{ error }}
+    </div>
+    {% endif %}
+
+    {% if status %}
+    <div class="alert alert-success mt-3" role="alert">
+      {{ status }}
+    </div>
+    {% endif %}
   </div>
 </div>
+
 
 {% endblock %}
