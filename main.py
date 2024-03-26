@@ -2,8 +2,6 @@ from flask import Flask, render_template, redirect, url_for, request, Response
 import sqlite3
 import hashlib
 import os
-from PIL import Image
-from io import BytesIO
 import base64
 import cv2
 from datetime import datetime
@@ -12,6 +10,8 @@ import numpy as np
 
 
 app = Flask(__name__)
+
+
 video_capture = cv2.VideoCapture(0) 
 
 

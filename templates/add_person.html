@@ -16,22 +16,22 @@
       </div>
       <div class="input mb-3">
         <label for="profilePicture" class="form-label">Upload JPG Picture:</label>
-        <input type="file" id="fileInput" name="file" accept=".jpg" required class="form-control" >
+        <input type="file" id="fileInput" name="file" accept=".jpg" required class="form-control">
       </div>
       <div class="input mb-3  d-flex align-items-center justify-content-center">
         <label for="missingButton" class="form-label"></label>
-        <button type="submit" class=" missing-button btn-primary" id="missingButton">Register Missing</button>
+        <button type="submit" class="missing-button btn-primary" id="missingButton">Register Missing</button>
       </div>
       <div class="invalid-feedback" id="fileValidationFeedback">
         Please upload a valid JPG file.
-    </div>
+      </div>
     </form>
     <div class="container mt-5">
       {% if show_success %}
-      <h2 class="mb-4">Upload Successful</h2>
-          <p>ID for the missing person is : {{ entry_id }}</p>
+        <h2 class="mb-4">Upload Successful</h2>
+        <p>ID for the missing person is: {{ entry_id }}</p>
       {% endif %}
-  </div>
+    </div>
   </div>
 </div>
 

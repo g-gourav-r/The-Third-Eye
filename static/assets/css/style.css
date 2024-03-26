@@ -1,6 +1,7 @@
-/*********************/
-/***Generic Styling***/
-/*********************/
+/***********************/
+/*** Generic Styling ***/
+/***********************/
+
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300&display=swap');
 
 html {
@@ -15,16 +16,17 @@ body {
     background-color: #1c1f24;
 }
 
-.roboto-thin {
+.roboto-thin, .roboto-light {
     font-family: "Roboto", sans-serif;
-    font-weight: 100;
     font-style: normal;
 }
 
+.roboto-thin {
+    font-weight: 100;
+}
+
 .roboto-light {
-    font-family: "Roboto", sans-serif;
     font-weight: 300;
-    font-style: normal;
 }
 
 .tinted-background {
@@ -32,7 +34,7 @@ body {
 }
 
 /**********************/
-/**Navigation Styling**/
+/*** Navigation Styling ***/
 /**********************/
 
 .navigation {
@@ -41,20 +43,20 @@ body {
 }
 
 /**************************/
-/**Middle content Styling**/
+/*** Middle content Styling ***/
 /**************************/
-.sidebar, .main-content {
+
+.sidebar,
+.main-content {
     height: 80vh;
     border: 1px solid #76ABAE;
 }
 
 /*********************/
-/** Side Bar Styling**/
+/*** Side Bar Styling ***/
 /*********************/
-.sidebar-content:hover{
-    background-color: #76ABAE;
-}
 
+.sidebar-content:hover,
 .sidebar-selected {
     background-color: #76ABAE;
 }
@@ -67,75 +69,136 @@ body {
     background-color: hsl(2, 100%, 34%);
 }
 
-.sidebar a{
+.sidebar a {
     text-decoration: none;
-    color: #EEEEEE  ;
+    color: #EEEEEE;
 }
 
 /*********************/
-/** Add User Styling**/
+/*** Add User Styling ***/
 /*********************/
 
-.add-user-wrapper{
+.add-user-wrapper {
     height: 100%;
+}
+
+.add-user-form {
+    border: 1px solid #76ABAE !important;
+    background-color: #1c1f24;
 }
 
 .add-user-wrapper input {
     background-color: #222831;
     border: 1px solid #EEEEEE;
-    border-radius: 8px; /* Adjust the value as needed for the desired curvature */
-    padding: 8px; /* Add padding for better visual appearance */
-    color: #FFFFFF; /* Text color */
+    border-radius: 8px;
+    padding: 8px;
+    color: #FFFFFF;
     box-shadow: none;
 }
 
 .add-user-wrapper input:hover {
-    color: #FFFFFF; /* Text color */
+    color: #FFFFFF;
     background-color: #76ABAE;
 }
 
 .add-user-wrapper button {
-    color: #FFFFFF; /* Text color */
+    color: #FFFFFF;
     background-color: #76ABAE;
     border-radius: 25px;
 }
 
 .add-user-wrapper button:hover {
-    color: #FFFFFF; /* Text color */
+    color: #FFFFFF;
     background-color: #00abb4;
     border-radius: 25px;
 }
 
-/*****************************/
-/** Register Missing Styling**/
-/*****************************/
+/***********************/
+/*** Login Page Styling ***/
+/***********************/
 
-.register-user-wrapper{
+.login-wrapper {
     height: 100%;
 }
 
-.form-wrapper{
-    border: 1px solid #76ABAE;
+.login-wrapper input{
+    color: #ffff;
 }
 
-.form-wrapper input{
+/****************************/
+/*** Admin Dashboard Styling ***/
+/****************************/
+
+.camera-image {
+    height: 80%;
+}
+
+.camera-container {
+    background-color: #1c1f24;
+}
+
+/*****************************/
+/*** Register Missing Styling ***/
+/*****************************/
+
+.register-user-wrapper {
+    height: 100%;
+}
+
+.form-wrapper {
+    border: 1px solid #76ABAE;
+    background-color: #1c1f24;
+}
+
+.form-wrapper input {
     background-color: #222831;
 }
 
-.missing-button{
+.missing-button {
     background-color: #76ABAE;
     border-radius: 10px;
     color: #EEEEEE;
 }
 
-.missing-button:hover{
+.missing-button:hover {
     background-color: #00abb4;
 }
 
 /***********************/
-/** Login Page Styling**/
+/*** Logs Table Styling ***/
 /***********************/
 
-.login-wrapper{
-    height: 100%;
+.logs-table {
+    padding-top: 3px;
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    text-align: center;
+    background-color: #1c1f24;
+}
+
+.logs-table th {
+    color: #76ABAE;
+}
+
+.logs-table th,
+.logs-table td {
+    padding: 8px;
+    border-radius: 2px;
+    vertical-align: middle;
+}
+
+.logs-table img {
+    max-width: 50px;
+    height: auto;
+    border-radius: 50%;
+    display: block;
+    margin: 0 auto;
+}
+
+.logs-table .btn {
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
 }
