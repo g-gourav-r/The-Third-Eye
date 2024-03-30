@@ -73,18 +73,19 @@ def find_person(name):
     """
     Finds a person in the system and logs the detection.
     """
-    with open('location.csv','r+') as f:
+    with open('./database/all_logs.csv', 'a+') as f:
+        f.seek(0)  # Move the file pointer to the beginning to read existing data
         myDataList = f.readlines()
-        nameList = []
-        for line in myDataList:
-            entry = line.split(',')
-            nameList.append(entry[0])
+        nameList = [entry.split(',')[0].strip() for entry in myDataList]
+        
         if name not in nameList:
             now = datetime.now()
-            time = now.strftime('%I:%M:%S:%p')
+            time = now.strftime('%I:%M:%S %p')
             date = now.strftime('%d-%B-%Y')
-            f.writelines(f'n{name}, {time}, {date}')
-
+            location = "Camera 1"
+            entry = f"{name.split('_')[1]}, {name.split('_')[0]}, {time}, {date}, {location}\n"
+            f.write(entry)
+ 
 def update_db(name):
     """
     Updates the database with the detection information.

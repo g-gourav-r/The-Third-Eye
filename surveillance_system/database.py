@@ -2,7 +2,9 @@ import sqlite3
 from datetime import datetime
 import hashlib
 import os
+import csv
 import base64
+from flask import render_template
 
 upload_folder = "./database/missing_person"
 
@@ -37,10 +39,7 @@ def initialize_database():
                         image BLOB NOT NULL,
                         status INTEGER NOT NULL DEFAULT 0,
                         location TEXT,
-                        location_image BLOB,
-                        time TEXT,
-                        to_be_tracked INTEGER NOT NULL DEFAULT 1,
-                        uploadtime TEXT NOT NULL DEFAULT CURRENT_TIME
+                        time TEXT
                     )''')
     
     # Add a super admin
@@ -111,8 +110,7 @@ def save_missing_person(name, file):
 
     return last_row_id
 
-
-def update_missing_person_status(id, status, location=None, location_image=None):
+def update_missing_person_status(id, status, location=None):
     """
     Updates the status and location of a missing person in the database.
     """
@@ -122,8 +120,8 @@ def update_missing_person_status(id, status, location=None, location_image=None)
     try:
         now = datetime.now()
         time_str = now.strftime('%d-%B-%Y %I:%M:%S %p')
-        cursor.execute('UPDATE missingPerson SET status = ?, location = ?, location_image = ?, time = ? WHERE id = ?',
-                       (status, location, location_image, time_str, id))
+        cursor.execute('UPDATE missingPerson SET status = ?, location = ?, time = ? WHERE id = ?',
+                       (status, location, time_str, id))
         conn.commit()
         return True
     except sqlite3.Error as e:
@@ -144,7 +142,7 @@ def get_missing_persons():
         missing_persons = cursor.fetchall()
         decoded_targets = []
         for target in missing_persons:
-            target_id, name, image, status, location, time, to_be_tracked, uploadtime = target
+            target_id, name, image, status, location, time = target
             try:
                 decoded_image = base64.b64encode(image).decode('utf-8')
             except Exception as e:
@@ -156,9 +154,7 @@ def get_missing_persons():
                 'decoded_image': decoded_image,
                 'status': status,
                 'last location': location,
-                'time': time,
-                'to_be_tracked': to_be_tracked,
-                'uploadTime': uploadtime
+                'time': time
             })
         return decoded_targets
     except sqlite3.Error as e:
@@ -167,3 +163,59 @@ def get_missing_persons():
     finally:
         conn.close()
 
+def view_individual_log(id):
+    """
+    Retrieves individual logs of a person.
+    """
+    conn = connect_database()
+    cursor = conn.cursor()
+
+    try:
+        cursor.execute('SELECT * FROM missingPerson WHERE id=?', (id,))
+        user = cursor.fetchone()
+        if user:
+            id, name, image, _, _, _ = user
+            try:
+                decoded_image = base64.b64encode(image).decode('utf-8')
+            except Exception as e:
+                print(f"Error decoding image: {e}")
+                decoded_image = None
+            individual_data = {
+                'id': id,
+                'name': name,
+                'image': decoded_image
+            }
+            details_dict = fetch_details_by_id(id)
+        else:
+            print(f"No user found with id {id}")
+            individual_data = None
+    except sqlite3.Error as e:
+        print(f"Error retrieving user: {e}")
+        individual_data = None
+    finally:
+        conn.close()
+
+    if individual_data:
+        return render_template('individual_log.html', individual_data=individual_data, details_dict=details_dict)
+    else:
+        return "User not found or error retrieving data"
+
+
+def fetch_details_by_id(target_id):
+    details_dict = {}
+    csv_file = "./database/all_logs.csv"
+    with open(csv_file, newline='') as file:
+        reader = csv.DictReader(file)
+        for row in reader:
+            if int(row['ID']) == target_id:
+                minute_key = row['Date'] + ' ' + row['Time'][:5]
+                if minute_key not in details_dict:
+                    details_dict[minute_key] = []
+                details_dict[minute_key].append({
+                    'ID': int(row['ID']),
+                    'Name': row['Name'],
+                    'Time': row['Time'],
+                    'Date': row['Date'],
+                    'Location': row['Location']
+                })
+    return details_dict

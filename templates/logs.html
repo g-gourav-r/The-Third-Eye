@@ -4,11 +4,10 @@
 {% block logs %}sidebar-selected{% endblock %}
 <!-- Main content of the body -->
 {% block main_content %}
-<body>
    <div class="container mt-3">
       <div class="row">
          <div class="col-md-12" >
-            <h2>User Management</h2>
+            <h2>Latest Logs</h2>
             <div style="overflow-y: auto; max-height: 400px;">
             <table class="logs-table" style="height: 100%;">
                <thead>
@@ -19,7 +18,6 @@
                      <th>Status</th>
                      <th>Location</th>
                      <th>Time</th>
-                     <th>Tracking</th>
                      <th>View Log</th>
                      <th>Delete</th>
                   </tr>
@@ -43,17 +41,13 @@
                                   Unknown Status
                               {% endif %}
                           </td>
-                          <td class="align-middle">{{ target['location'] or 'N/A' }}</td>
+                          <td class="align-middle">{{ target['last location'] or 'N/A' }}</td>
                           <td class="align-middle">{{ target['time'] or 'N/A' }}</td>
                           <td class="align-middle">
-                              <form action="{{ url_for('toggle_search', id=target['target_id']) }}" method="post">
-                                  <input type="hidden" name="_method" value="PATCH">
-                                  <button type="submit" class="btn {{ 'btn-success' if target['to_be_tracked'] == 1 else 'btn-primary' }} toggle-btn" name="to_be_tracked" value="{{ 1 if target['to_be_tracked'] == 0 else 0 }}">
-                                      {{ 'Tracking' if target['to_be_tracked'] == 1 else 'Not Tracking' }}
-                                  </button>                            
-                              </form>
-                          </td>
-                          <td class="align-middle"><button type="submit" class="btn btn-info">View Logs</button></td>
+                            <form action="{{ url_for('view_individual_log', id=target['target_id']) }}" method="post">
+                                <input type="hidden" name="_method" value="PATCH">
+                                <button type="submit" class="btn btn-info" name="view_log">View Logs</button>                            
+                            </form>
                           <td class="align-middle">
                             <form action="{{ url_for('delete_person', id=target['target_id']) }}" method="post">
                                 <input type="hidden" name="_method" value="PATCH">

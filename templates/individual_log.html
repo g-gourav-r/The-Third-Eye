@@ -1,0 +1,52 @@
+<!-- Extending the base template -->
+{% extends 'base.html' %}
+<!-- Highlight item in the sidebar -->
+{% block logs %}sidebar-selected{% endblock %}
+<!-- Main content of the body -->
+{% block main_content %}
+<div class="container mt-3">
+    <div class="row">
+       <div class="col-md-12" >
+        <div class="row p-2 mb-4">
+            <div class="col-md-6">
+                <h3>Name: {{individual_data['name']}}</h3>
+                <h4>ID: {{individual_data['id']}}</h4>
+            </div>
+            <div class="col-md-6 text-end px-5 pb-2">
+                <div>
+                <img src="data:image/png;base64,{{ individual_data['image'] }}" alt="{{ individual_data['name'] }} Image" 
+                style="width: 75px; height: 75px; object-fit: cover; border-radius: 3px;border: 3px solid #76ABAE;">
+                </div>
+            </div>
+        </div>
+        <div style="overflow-y: auto; max-height: 350px;">
+            <table class="logs-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Time</th>
+                        <th>Location</th>
+                        <th>Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for minute_key, entries in details_dict.items() %}
+                        {% for entry in entries %}
+                            <tr>
+                                <td class="align-middle">{{ entry['ID'] }}</td>
+                                <td class="align-middle">{{ entry['Name'] }}</td>
+                                <td class="align-middle">{{ entry['Time'] or 'N/A' }}</td>
+                                <td class="align-middle">{{ entry['Location'] or 'N/A' }}</td>
+                                <td class="align-middle">{{ entry['Date'] or 'N/A' }}</td>
+                            </tr>
+                        {% endfor %}
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        
+       </div>
+    </div>
+ </div>
+{% endblock %} 

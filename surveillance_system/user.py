@@ -115,20 +115,3 @@ def get_user(username):
         return None
     finally:
         conn.close()
-
-        
-def toggle_search(id):
-    """
-    Toggles the search status of a missing person.
-    """
-    to_be_tracked = int(request.form['to_be_tracked'])
-    print(id, to_be_tracked)
-    conn = connect_database()
-    try:
-        with conn:
-            conn.execute("UPDATE missingPerson SET to_be_tracked = ? WHERE id = ?", (to_be_tracked, id))
-    except Exception as e:
-        print(f"An error occurred while updating to_be_tracked: {e}")
-    finally:
-        conn.close()
-    return redirect(url_for('logs'))
