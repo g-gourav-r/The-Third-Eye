@@ -43,16 +43,24 @@ def detect_faces(frame):
     imgS = cv2.cvtColor(imgS, cv2.COLOR_BGR2RGB)
     faces_in_frame = face_recognition.face_locations(imgS)
     encoded_faces = face_recognition.face_encodings(imgS, faces_in_frame)
+    
+    # Initialize the frame to return
+    result_frame = frame.copy()
+    
     for encode_face, faceloc in zip(encoded_faces, faces_in_frame):
         matches = face_recognition.compare_faces(encoded_face_train, encode_face)
         faceDist = face_recognition.face_distance(encoded_face_train, encode_face)
-        matchIndex = np.argmin(faceDist)
-        print(matchIndex)
-        if matches[matchIndex]:
-            name = classNames[matchIndex].upper().lower()
-            y1, x2, y2, x1 = faceloc
-            y1, x2, y2, x1 = y1 * 4, x2 * 4, y2 * 4, x1 * 4
-            cv2.rectangle(frame, (x1, y1), (x2, y2), (0, 255, 0), 2)
-            cv2.rectangle(frame, (x1, y2 - 35), (x2, y2), (0, 255, 0), cv2.FILLED)
-            cv2.putText(frame, name, (x1 + 6, y2 - 5), cv2.FONT_HERSHEY_COMPLEX, 1, (255, 255, 255), 2)
-    return frame
+        
+        if faceDist:  # Check if faceDist is not empty
+            matchIndex = np.argmin(faceDist)
+        
+            if matches[matchIndex]:
+                name = classNames[matchIndex].upper().lower()
+                y1, x2, y2, x1 = faceloc
+                y1, x2, y2, x1 = y1 * 4, x2 * 4, y2 * 4, x1 * 4
+                cv2.rectangle(result_frame, (x1, y1), (x2, y2), (0, 255, 0), 2)
+                cv2.rectangle(result_frame, (x1, y2 - 35), (x2, y2), (0, 255, 0), cv2.FILLED)
+                cv2.putText(result_frame, name, (x1 + 6, y2 - 5), cv2.FONT_HERSHEY_COMPLEX, 1, (255, 255, 255), 2)
+    
+    # Always return the frame, whether or not matches were found
+    return result_frame
