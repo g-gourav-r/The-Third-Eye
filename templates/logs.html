@@ -7,9 +7,10 @@
 <body>
    <div class="container mt-3">
       <div class="row">
-         <div class="col-md-12">
+         <div class="col-md-12" >
             <h2>User Management</h2>
-            <table class="logs-table">
+            <div style="overflow-y: auto; max-height: 400px;">
+            <table class="logs-table" style="height: 100%;">
                <thead>
                   <tr>
                      <th>ID</th>
@@ -17,53 +18,52 @@
                      <th>Image</th>
                      <th>Status</th>
                      <th>Location</th>
-                     <th>Location Image</th>
                      <th>Time</th>
                      <th>Tracking</th>
-                     <th>Upload Time</th>
+                     <th>View Log</th>
+                     <th>Delete</th>
                   </tr>
                </thead>
                <tbody>
                   {% for target in data %}
-                  <tr>
-                     <td class="align-middle">{{ target['target_id'] }}</td>
-                     <td class="align-middle">{{ target['name'] }}</td>
-                     <td class="align-middle">
-                        <img src="data:image/png;base64,{{ target['decoded_image'] }}" alt="{{ target['name'] }} Image" 
-                           style="width: 50px; height: 50px; object-fit: cover; border-radius: 50%;">
-                     </td>
-                     <td class="align-middle">
-                        {% if target['status'] == 0 %}
-                        <span style="color: red;font-size: 30px;">●</span>
-                        {% elif target['status'] == 1 %}
-                        <span style="color: green;font-size: 30px;">●</span>
-                        {% else %}
-                        Unknown Status
-                        {% endif %}
-                     </td>
-                     <td class="align-middle">{{ target['location'] or 'N/A' }}</td>
-                     <td class="align-middle">{{ target['time'] or 'N/A' }}</td>
-                     <td class="align-middle">
-                        {% if target['decoded_location_image'] %}
-                        <img src="data:image/png;base64,{{ target['decoded_location_image'] }}" alt="Location Image" 
-                           style="width: 50px; height: 50px; object-fit: cover; border-radius: 50%;">
-                        {% else %}
-                        N/A
-                        {% endif %}
-                     </td>
-                     <td class="align-middle">
-                        <form action="{{ url_for('toggle_search', id=target['target_id']) }}" method="post">
-                           <input type="hidden" name="_method" value="PATCH">
-                           <button type="submit" class="btn {{ 'btn-success' if target['to_be_tracked'] == 1 else 'btn-primary' }} toggle-btn" name="to_be_tracked" value="{{ 1 if target['to_be_tracked'] == 0 else 0 }}">
-                           {{ 'Tracking' if target['to_be_tracked'] == 1 else 'Not Tracking' }}
-                           </button>                            
-                        </form>
-                     </td>
-                     <td class="align-middle">{{ target['uploadTime']}}</td>
-                  </tr>
-                  {% endfor %}
-               </tbody>
+                      <tr>
+                          <td class="align-middle">{{ target['target_id'] }}</td>
+                          <td class="align-middle">{{ target['name'] }}</td>
+                          <td class="align-middle">
+                              <img src="data:image/png;base64,{{ target['decoded_image'] }}" alt="{{ target['name'] }} Image" 
+                                  style="width: 50px; height: 50px; object-fit: cover; border-radius: 50%;">
+                          </td>
+                          <td class="align-middle">
+                              {% if target['status'] == 0 %}
+                              
+                                  <span style="color: red;font-size: 30px;">●</span>
+                              {% elif target['status'] == 1 %}
+                                  <span style="color: green;font-size: 30px;">●</span>
+                              {% else %}
+                                  Unknown Status
+                              {% endif %}
+                          </td>
+                          <td class="align-middle">{{ target['location'] or 'N/A' }}</td>
+                          <td class="align-middle">{{ target['time'] or 'N/A' }}</td>
+                          <td class="align-middle">
+                              <form action="{{ url_for('toggle_search', id=target['target_id']) }}" method="post">
+                                  <input type="hidden" name="_method" value="PATCH">
+                                  <button type="submit" class="btn {{ 'btn-success' if target['to_be_tracked'] == 1 else 'btn-primary' }} toggle-btn" name="to_be_tracked" value="{{ 1 if target['to_be_tracked'] == 0 else 0 }}">
+                                      {{ 'Tracking' if target['to_be_tracked'] == 1 else 'Not Tracking' }}
+                                  </button>                            
+                              </form>
+                          </td>
+                          <td class="align-middle"><button type="submit" class="btn btn-info">View Logs</button></td>
+                          <td class="align-middle">
+                            <form action="{{ url_for('delete_person', id=target['target_id']) }}" method="post">
+                                <input type="hidden" name="_method" value="PATCH">
+                                <button type="submit" class="btn btn-danger" name="delete_person">Delete</button>                            
+                            </form>
+                        </tr>
+              {% endfor %}
+              </tbody>
             </table>
+        </div>
          </div>
       </div>
    </div>
