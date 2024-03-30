@@ -18,8 +18,6 @@ app.add_url_rule('/admin_dashboard', 'admin_dashboard', admin_dashboard)
 app.add_url_rule('/user_dashboard', 'user_dashboard',user_dashboard)
 app.add_url_rule('/logs', 'logs', logs)
 @app.route('/video_feed')
-
-
 def video_feed():
     return Response(generate_frames(), mimetype='multipart/x-mixed-replace; boundary=frame')
 
