@@ -36,6 +36,7 @@ def generate_frames():
                 matches = face_recognition.compare_faces(encoded_face_train, encode_face)
                 faceDist = face_recognition.face_distance(encoded_face_train, encode_face)
                 matchIndex = np.argmin(faceDist)
+                name = "Unknown"
                 if matches[matchIndex]:
                     name = classNames[matchIndex].upper().lower()
                     name = name.title()
@@ -48,9 +49,14 @@ def generate_frames():
                     print(name)
                     find_person(name)
                     update_db(name)
-                    ret, jpeg = cv2.imencode('.jpg', frame)
-                    frame_bytes = jpeg.tobytes()
-                    yield (b'--frame\r\n'b'Content-Type: image/jpeg\r\n\r\n' + frame_bytes + b'\r\n')
+                else:
+                    # If no match found, you can handle it here
+                    pass
+                    
+            ret, jpeg = cv2.imencode('.jpg', frame)
+            frame_bytes = jpeg.tobytes()
+            yield (b'--frame\r\n'b'Content-Type: image/jpeg\r\n\r\n' + frame_bytes + b'\r\n')
+
 
 def find_encodings(images):
     """
