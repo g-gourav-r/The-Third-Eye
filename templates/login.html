@@ -34,7 +34,15 @@
                       <button type="submit" class=" missing-button btn-primary" id="missingButton">Login</button>
                     </div>
                   </form>
+                  <div class="container">
+                    {% if error %}
+                        <div class="alert alert-danger" role="alert">
+                            {{ error }}
+                        </div>
+                    {% endif %}
+                  </div>
                 </div>
+
               </div>
             </div>
           </div>
