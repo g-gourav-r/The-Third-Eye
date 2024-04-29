@@ -5,6 +5,7 @@ The Third Eye Project is a facial recognition system developed using the dlib an
 
 **Workflow and System Architecture:**
 For detailed information regarding the workflow and system architecture of The Third Eye Project, please refer to the provided link.
+[Link to PDF](Read Me Docs/Application Overview.pdf)
 
 **System Requirements:**
 The Third Eye Project requires Python 3.11 and relies on the dlib and face_recognition libraries. Ensure that your system meets these requirements before installation.
