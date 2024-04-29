@@ -1,7 +1,9 @@
-# The Third Eye Project Documentation**
+# The Third Eye Project Documentation
 <br>
 <br>
-![The Third eye](https://github.com/g-gourav-r/The-Third-Eye/assets/75977813/8bf8bbc3-9f07-408f-aac5-6e9686507ae2)
+
+![The Third eye](https://github.com/g-gourav-r/The-Third-Eye/assets/75977813/bee43179-65df-4525-b502-bcfef1e26227)
+
 <br>
 <br>
 ## Introduction:
