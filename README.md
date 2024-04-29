@@ -1,24 +1,16 @@
-# Check Python versions installed
+**The Third Eye Project Documentation**
 
-`py -0 versions`
+**Introduction:**
+The Third Eye Project is a facial recognition system developed using the dlib and face_recognition libraries in Python 3.11. Its primary purpose is to assist in finding missing persons by allowing users to upload photos for identification, which are then logged for further analysis.
 
-Download Python 3.11 from the official website and install it
-Once downloaded, follow the installation instructions for your operating system
+**Workflow and System Architecture:**
+For detailed information regarding the workflow and system architecture of The Third Eye Project, please refer to the provided link.
 
-# Create a virtual environment with Python 3.11
-`python3.11 -m venv venv`
+**System Requirements:**
+The Third Eye Project requires Python 3.11 and relies on the dlib and face_recognition libraries. Ensure that your system meets these requirements before installation.
 
-# Activate the virtual environment
-## On Windows:
-`venv\Scripts\activate`
-## On macOS/Linux:
-`source venv/bin/activate`
+**Installation:**
+To install The Third Eye Project, please follow the instructions provided in the installation guide linked below.
 
-# Install the dlib.whl file
-`pip install ./installation/dlib.whl`
-
-# Install the dependencies from requirements.txt
-`pip install -r ./installation/requirements.txt`
-
-# Run the Flask application
-`python app.py`
+**Application Overview:**
+For an overview of The Third Eye Project's application interface and functionality, please view the screenshot provided at the corresponding link.
