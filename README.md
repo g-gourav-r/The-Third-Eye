@@ -1,4 +1,5 @@
 **The Third Eye Project Documentation**
+![The Third eye](https://github.com/g-gourav-r/The-Third-Eye/assets/75977813/8bf8bbc3-9f07-408f-aac5-6e9686507ae2)
 
 **Introduction:**
 The Third Eye Project is a facial recognition system developed using the `dlib` and `face_recognition` libraries in Python 3.11. Its primary purpose is to assist in finding missing persons by allowing users to upload photos for identification, which are then logged for further analysis.
